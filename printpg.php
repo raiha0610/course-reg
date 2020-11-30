@@ -45,7 +45,7 @@ img{
 
     <div class="header">
         <div class="logo" >
-            <img src="nitpy.jpg" alt="nitpy" style="width:12%;height:12%;" >
+            <img src="nitpy.jpg" alt="nitpy logo" style="width:12%;height:12%;" >
         </div>
 
    <div class="title">
