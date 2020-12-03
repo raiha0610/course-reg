@@ -25,10 +25,7 @@ table {
 
   <script type="text/javascript" src="redocourse.js"></script>
 
-<script>
-var cr=document.getElementById("mine").value;
-document.getElementById("demo").innerHTML=cr;
-</script>
+
 
 
 </head>
@@ -110,7 +107,7 @@ document.getElementById("demo").innerHTML=cr;
     <button type="button" class="delete-row" onclick="removerow()">Delete Row</button>
   
     <br><br>
-    <p id="demo"></p>
+
     </div>
     <div class="input-group">
     <p>
