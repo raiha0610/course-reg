@@ -11,7 +11,7 @@ if(isset($_POST['mydata'])) {
     echo "<option >------- Select --------</option>";
     while($row = mysqli_fetch_object($res)) {
        
-      echo "<option >".$row->COURSE_NAME."</option>";
+      echo "<option >".$row->COURSE_ID." ".$row->COURSE_NAME."</option>";
     }
   }
 } else {
