@@ -1,10 +1,13 @@
 <?php 
   session_start(); 
+  include('connect.php');
   ?>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8" />
+
 <style>
 * {
   box-sizing: border-box;
@@ -92,10 +95,20 @@ img{
     </script>
 </head>
 <body>
+<?php if (isset($_POST['confirm'])) {
+          $date=date("d-m-Y");
+       echo $date;
+           while($row = mysqli_fetch_object($result)){  
+           $sql="INSERT INSERT INTO course_reg (ROLL_NO, COURSE_ID, DATE_OF_REGISTRATION) VALUES ('$rno','$row->cid','$date')";
+           $res=mysqli_query($db,$sql);
+            }
 
+            header('location: printpg.php');
+        }
+        ?>
     <div class="header">
         <div class="logo" >
-            <img src="nitpy.jpg" alt="nitpy" style="width:15%;height:15%;" >
+            <img src="nitpy_img.jpg" alt="nitpy" style="width:15%;height:15%;" >
         </div>
 
         <div class="title">
@@ -132,17 +145,16 @@ img{
               <div class="contact">
                 <table style="height:50%;width:80%;text-align:left;">
                     <tr>
-                      <td style="text-align:center;">5.</td>
-                      <td style="text-align:center;" rowspan="2">Address for Communication:<br>  <?php echo $_SESSION["address"] ; ?>
+                     
+                      <td style="text-align:center;" rowspan="2">5.Address for Communication:<br>  <?php echo $_SESSION["address"] ; ?>
                       </td>
                       <td>Mobile Number:<br>
                     <?php echo $_SESSION["mno"] ; ?>
                       </td>
                       </tr>
                       <tr>
-                      <td colspan="2" >
-                      </td>
-                      <td>Email ID : :<br>
+                     
+                      <td>Email ID : <br>
                     <?php echo $_SESSION["email"] ; ?>
                       </td>
                       </tr>
@@ -155,17 +167,53 @@ img{
               <label>b) Any other dues : <?php echo $_SESSION["otherdues"] ; ?> </label>
               <br>
               <label>7. Course Registered : </label>
-              <table style="height:50%;width:80%;text-align:left;">
-              <tr>
-              <td style="text-align:center;">Subject Code</td>
-              <td style="text-align:center;">Title</td>
-              <td style="text-align:center;">Credit</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+              <table>
+              <thead id="pgh">
+
+              </thead>
+              <tbody id="pgb"> 
+              <?php
+                $query = "SELECT * FROM temp1"; //You don't need a ; like you do in SQL
+                $result = mysqli_query($db,$query);
+                echo "<table style='height:50%;width:80%;text-align:left;'>"; // start a table tag in the HTML
+                echo "<tr>";
+                echo "<th style=text-align:center;'>Subject Code</th>";
+                echo "<th style=text-align:center;'>Title</th>";
+                echo "<th style=text-align:center;'>Credit</th>";  
+                echo "</tr>";
+                while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
+                echo "<tr><td style=text-align:center;'>" . $row['cid'] . "</td><td>" . $row['cname'] . "</td> <td style=text-align:center;'>" . $row['credit'] . "</td></tr>";  
+                }
+                echo "</table>"; //Close the table in HTML
+              ?>
+              </tbody>
+              </table>
+              <br>
+              <label>8. Redo Courses : </label>
+              <table>
+              <thead id="pgrh">
+
+              </thead>
+              <tbody id="pgrb"> 
+              <?php
+                $query = "SELECT * FROM rtemp"; //You don't need a ; like you do in SQL
+                $result = mysqli_query($db,$query);
+                echo "<table style='height:50%;width:80%;text-align:left;'>"; // start a table tag in the HTML
+                echo "<tr>";
+                echo "<th style=text-align:center;'>Subject Code</th>";
+                echo "<th style=text-align:center;'>Title</th>";
+                echo "<th style=text-align:center;'>Credit</th>";  
+                echo "</tr>";
+                
+                if($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
+                echo "<tr><td style=text-align:center;'>" . $row['rcid'] . "</td><td>" . $row['rcname'] . "</td> <td style=text-align:center;'>" . $row['rcredit'] . "</td></tr>";  
+                }
+                else{
+                  echo "<tr style='text-align:center;font-weight:bold;'><td colspan='3'>No REDO COURSES</td></tr>";
+                }
+                echo "</table>"; //Close the table in HTML
+              ?>
+              </tbody>
               </table>
           </div>
           <br>

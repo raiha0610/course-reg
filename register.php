@@ -26,10 +26,11 @@ table {
   <script type="text/javascript" src="redocourse.js"></script>
 
 
+ 
 
 
 </head>
-<body>
+<body >
   <div class="header">
   	<h2>COURSE REGISTRATION</h2>
   </div>
@@ -85,8 +86,9 @@ table {
 <br><br>
 <div class="input-group">
 <label>COURSE :</label>
-    <select name="course" id="course" required>
+    <select name="course" id="course">
     
+
     </select>
  
     <input type="button" class="add-row" value="Add Row" onclick="showUser()">
@@ -96,7 +98,7 @@ table {
 <br><br>
 <div class="input-group">
     <input type="button" class="global" value="CHOOSE GLOBAL ELECTIVE" >
-    <select name="ge" id="ge" required></select>
+    <select name="ge" id="ge" ></select>
  
     <input type="button"  value="Add" onclick="showglobal()">
    </div>
@@ -114,34 +116,108 @@ table {
         </thead>
       
         <tfoot>
-    <tr> <td colspan='3'><input type="button" value="Total Credits" onclick="calculateSum()"></td><td ><p id="sum"></p></td> </tr>
+    <tr> <td colspan='3'><input type="button" value="Total Credits"  onclick="calculateSum()" required></td>
+    <td ><p id="sum"></p> </tr>
   </tfoot>
     </table>
     <button type="button" class="delete-row" onclick="removerow()">Delete Row</button>
   
     <br><br>
+    <input type="button"  value="SAVE" onclick="saveTable()" required></input>
     </div>
-    <div class="input-group">
-    <p>
-<input type="button" value="CHOOSE REDO COURSES" onclick="createTable()" />
-</p>
-<div id="cont"></div>     
-<p>
-<input type="button" id="addRow" value="Add New Row" onclick="newRow()" />
-</p>
-​</div>
-    
-    
+
+<br><br>
+
+<input type="button" value="REDO COURSES" onclick="myFunction()">
+    <div id="redo" style="display:none">
+<div class="input-group">
+<label >COURSE ID:</label>
+<input type="text" name="r_cid"  class="form-control" id="rcid" onkeyup="validatercid();">
+<span id="rciderr" style="color: red"></span>
+</div>
+<div class="input-group">
+<label >COURSE NAME:</label>
+<input type="text" name="r_cname" class="form-control" id="rcname" onkeyup="validatercname();">
+<span id="rcnameerr" style="color: red"></span>
+</div>
+<div>
+<label >COURSE CREDIT:</label>
+<input type="text" name="r_credit" class="form-control" id="rcredit" onkeyup="validatercredit();">
+<span id="rcrediterr" style="color: red"></span>
+</div>
+<input type="button" name="send" class="btn btn-primary" value="add data" id="butsend">
+
+
+<table id="table1" name="table1" class="table table-bordered">
+<tbody>
+<tr>
+
+<th>COURSE ID</th>
+<th>COURSE NAME</th>
+<th>CREDITS</th>
+<th></th>
+<tr>
+</tbody>
+</table>
+<input type="button" name="save" class="btn btn-primary" value="Save" id="butsave" required>
+</div>
+
 <br><br>
 
    
 
   
   	<div class="input-group">
-    <button type="button" id="butsave" name="save" onclick="saveTable()">Save</button>
+   
   	  <button type="submit" id="btn" name="reg_user">Register</button>
   	</div>
  
   </form>
+  <script type="text/javascript">
+    function validatercid() {
+        var rcid = document.getElementById("rcid").value;
+        var rciderr = document.getElementById("rciderr");
+        rciderr.innerHTML = "";
+        if(rcid == ""){
+          rciderr.innerHTML = " REDO COURSE ID should not be empty ";
+        }
+        var expr = /^([A-Za-z]{1,2}[0-9]{3,4})+$/;
+        if (!expr.test(rcid)) {
+            rciderr.innerHTML = " INVALID REDO COURSE ID ";
+        }
+    }
+    function validatercname() {
+        var rcname = document.getElementById("rcname").value;
+        var rcnameerr = document.getElementById("rcnameerr");
+        rcnameerr.innerHTML = "";
+        var expr = /^[ A-Za-z]+$/
+        rcnamelen=rcname.length;
+        if( rcname ==""){
+          rcnameerr.innerHTML = " REDO COURSE NAME should not be empty ";
+        }
+        if (!expr.test(rcname)) {
+          if(rcnamelen>=50){
+            rcnameerr.innerHTML = " Should not be greater than 50 characters ";
+          }
+          else{
+            rcnameerr.innerHTML = "";
+          }
+            rcnameerr.innerHTML = " INVALID REDO COURSE NAME ";
+      }
+    }
+    function validatercredit() {
+        var rcredit = document.getElementById("rcredit").value;
+        var rcrediterr = document.getElementById("rcrediterr");
+        rcrediterr.innerHTML = "";
+        var expr = /^([1-3]{1})+$/;
+        if(rcredit == ""){
+          rcrediterr.innerHTML = " REDO COURSE CREDIT should not be empty";
+        }
+        if (!expr.test(rcredit)) {
+            rcrediterr.innerHTML = " INVALID REDO COURSE CREDIT ";
+        }
+    }
+
+    </script>
 </body>
 </html>

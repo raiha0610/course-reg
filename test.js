@@ -41,6 +41,7 @@ function saveTable() {
   var cid = new Array(); 
   var cname = new Array();
   var credit = new Array();
+
   $(".cid").each(function () {
    
           cid.push($(this).val());   
@@ -51,13 +52,15 @@ function saveTable() {
   $('.credit').each(function () {
       credit.push($(this).val());   
   });
-  
+
   
   
   var sendcid = JSON.stringify(cid); 
   var sendcname = JSON.stringify(cname);
   var sendcredit= JSON.stringify(credit);
-  
+   
+ 
+
   $.ajax({
   url: "save-table.php",
   type: "post",
@@ -66,5 +69,55 @@ function saveTable() {
   alert(data); /* alerts the response from php.*/
   }
   });
+ 
   }
+
+$(document).ready(function() {
+var id = 1; 
+/*Assigning id and class for tr and td tags for separation.*/
+$("#butsend").click(function() {
+var newid = id++; 
+$("#table1").append('<tr valign="top" id="'+newid+'">\n\
+<td width="100px" class="rcid'+newid+'">' + $("#rcid").val() + '</td>\n\
+<td width="100px" class="rcname'+newid+'">' + $("#rcname").val() + '</td>\n\
+<td width="100px" class="rcredit'+newid+'">' + $("#rcredit").val() + '</td>\n\
+<td width="100px"><a href="javascript:void(0);" class="remCF">Remove</a></td>\n\ </tr>');
+});
+$("#table1").on('click', '.remCF', function() {
+$(this).parent().parent().remove();
+});
+/*crating new click event for save button*/
+$("#butsave").click(function() {
+var lastRowId = $('#table1 tr:last').attr("id"); /*finds id of the last row inside table*/
+var rcname = new Array(); 
+var rcid = new Array();
+var rcredit = new Array();
+for ( var i = 1; i <= lastRowId; i++) {
+  rcid.push($("#"+i+" .rcid"+i).html());
+rcname.push($("#"+i+" .rcname"+i).html()); /*pushing all the names listed in the table*/
+rcredit.push($("#"+i+" .rcredit"+i).html()); /*pushing all the emails listed in the table*/
+}
+var sendrcid = JSON.stringify(rcid); 
+var sendrcname = JSON.stringify(rcname);
+var sendrcredit= JSON.stringify(rcredit);
+$.ajax({
+url: "redo_insert.php",
+type: "post",
+data: {rcid : sendrcid , rcname : sendrcname,rcredit : sendrcredit},
+success : function(data){
+alert(data); /* alerts the response from php.*/
+}
+});
+});
+});
+
+
+function myFunction() {
+  var x = document.getElementById("redo");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 

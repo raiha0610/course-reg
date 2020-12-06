@@ -1,7 +1,7 @@
 
 <?php 
-  session_start(); 
-include('connect.php');
+
+include('server.php');
   ?>
 <!DOCTYPE html>
 <html>
@@ -47,28 +47,67 @@ include('connect.php');
     $_SESSION["mno"]=$mno;
     $_SESSION["email"]=$email;
   ?>
- 
+ <?php echo "4.Course registered : "; ?>
+ <br><br>
   <table>
         <thead id="myh">
-            <tr>
-                <th>COURSE_ID</th>
-                <th>COURSE NAME</th>
-                <th>CREDITS</th>
-                
-            </tr>
+
         </thead>
         <tbody id="txtHint"> 
-         
+        <?php
+          $query = "SELECT * FROM temp1"; //You don't need a ; like you do in SQL
+          $result = mysqli_query($db,$query);
+
+          echo "<table>"; // start a table tag in the HTML
+          echo "<tr>";
+          echo "<th>COURSE_ID</th>";
+          echo "<th>COURSE NAME</th>";
+          echo "<th>CREDITS</th>";
+          
+          echo "</tr>";
+
+          while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
+          echo "<tr><td>" . $row['cid'] . "</td><td>" . $row['cname'] . "</td> <td>" . $row['credit'] . "</td></tr>";  
+          }
+          echo " <tfoot>
+          <tr> <td colspan='3'>TOTAL CREDITS:" . $_SESSION["tcred"] . "</td> </tr>
+        </tfoot>";
+
+          echo "</table>"; //Close the table in HTML
+        ?>
         </tbody>
         </table>
-        <p id="demo"></p> 
+        <?php echo "5.Redo Courses : "; ?>
+ <br><br>
+  <table>
+        <thead id="myh">
+
+        </thead>
+        <tbody id="redotbl"> 
+        <?php
+          $query = "SELECT * FROM rtemp"; //You don't need a ; like you do in SQL
+          $result = mysqli_query($db,$query);
+          echo "<table>"; // start a table tag in the HTML
+          echo "<tr>";
+          echo "<th>COURSE ID</th>";
+          echo "<th>COURSE NAME</th>";
+          echo "<th>CREDIT</th>";  
+          echo "</tr>";
+          if($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
+          echo "<tr><td>" . $row['rcid'] . "</td><td>" . $row['rcname'] . "</td> <td>" . $row['rcredit'] . "</td></tr>";  
+          }
+          else{
+            echo "<tr style='text-align:center;font-weight:bold;'><td colspan='3'>No REDO COURSES</td></tr>";
+          }
+          echo "</table>"; //Close the table in HTML
+        ?>
+        </tbody>
+        </table>
   
         <button type="submit" class="btn" name="confirm">Confirm</button>
     	</div>
-        <?php if (isset($_POST['confirm'])) {
-            header('location: printpg.php');
-        }
-        ?>
+        
+        
 
 
 </form>

@@ -7,6 +7,8 @@ if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+$sql="DELETE FROM `temp1` WHERE 1";
+$res=mysqli_query($con,$sql);
 for ($i = 0; $i < count($cnameArr); $i++) {
 if(($cnameArr[$i] != "")){ /*not allowing empty values and the row which has been removed.*/
 $sql="INSERT INTO temp1 (cid,cname,credit)

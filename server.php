@@ -4,8 +4,7 @@ include('connect.php');
 
 
 // initializing variables
-$name = "";
-$email = "";
+
 $rno = "";
 $pno = "";
 $add = "";
@@ -51,8 +50,7 @@ if (isset($_POST['login_user'])) {
       $dues = mysqli_real_escape_string($db, $_POST['dues']);
       $pos = mysqli_real_escape_string($db, $_POST['pos']);
       $sem = mysqli_real_escape_string($db, $_POST['sem']);
-      $course = mysqli_real_escape_string($db, $_POST['course']);
-    
+ 
 
 
       if (empty($pos)){ 
@@ -67,9 +65,7 @@ if (isset($_POST['login_user'])) {
       if (empty($sem)) { 
         array_push($errors, "*Select the SEMESTER");
         }
-      if (empty($course)) { 
-        array_push($errors, "*Select the COURSE");
-        } 
+      
 
         if($_POST['sem'] == -1){
         array_push($errors, "*Please select Semester and Course");
@@ -96,12 +92,40 @@ if (isset($_POST['login_user'])) {
         header('location: confirmpage.php');
    
         }
-
-      
-
-
-
       }
+
+     
+
+
+       if (isset($_POST['confirm'])) {
+         $date=date("Y-m-d");
+         $rollno=$_SESSION['rollno'];
+        $sem=$_SESSION['semester'];
+        $fee=$_SESSION["feestatus"];
+        $dues=$_SESSION["otherdues"];
+        $query1= "INSERT INTO `fee_details`(`ROLL_NO`, `INSTITUTE/HOSTEL_FEE_STATUS`, `OTHER_FEE`, `SEMESTER`, `DATE_OF_REGISTRATION`) VALUES 
+        ('$rollno', '$fee', '$dues','$sem','$date')";
+        mysqli_query($db,$query1);
+        $sql = "SELECT * FROM temp1"; 
+        $res = mysqli_query($db,$sql);
+        while($list = mysqli_fetch_array($res)){
+          $c_id=$list['cid'];
+          $sql1="INSERT INTO course_reg (ROLL_NO,COURSE_ID, DATE_OF_REGISTRATION) VALUES ('$rollno','$c_id','$date')";
+          mysqli_query($db, $sql1);
+          
+        }   
+        $sql2 = "SELECT * FROM rtemp"; 
+        $res1 = mysqli_query($db,$sql2);
+        while($list1 = mysqli_fetch_array($res1)){
+          $c_id=$list1['rcid'];
+          $sql3="INSERT INTO course_redo (ROLL_NO,COURSE_ID, DATE_OF_REGISTRATION) VALUES ('$rollno','$c_id','$date')";
+          mysqli_query($db, $sql3);
+          
+        }   
+
+
+        header('location: printpg.php');
+    }
 
 
 

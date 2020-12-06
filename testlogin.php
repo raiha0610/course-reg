@@ -23,7 +23,10 @@
   	<div class="input-group">
   		<button type="submit" class="btn" name="login_user">Login</button>
   	</div>
-  
+	  <?php
+	 mysqli_query($db,'TRUNCATE TABLE temp1;');
+	 mysqli_query($db,'TRUNCATE TABLE rtemp;');
+	  ?>
   </form>
 </body>
 </html>
