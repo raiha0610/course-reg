@@ -46,22 +46,33 @@ if (isset($_POST['login_user'])) {
     // REGISTER USER
     if (isset($_POST['reg_user'])) {
       // receive all input values from the form
-      $fee = mysqli_real_escape_string($db, $_POST['fee']);
-      $dues = mysqli_real_escape_string($db, $_POST['dues']);
-      $pos = mysqli_real_escape_string($db, $_POST['pos']);
+    
+    
       $sem = mysqli_real_escape_string($db, $_POST['sem']);
- 
 
-
-      if (empty($pos)){ 
-        array_push($errors, "*Programme of Study is required");
+ $qry="SELECT * FROM temp1";
+ $sol= mysqli_query($db, $qry);
+if(mysqli_num_rows($sol) == 0)
+{
+  array_push($errors, "*Courses not selected/saved");
+}
+ if(!isset($_POST['pos'])){ 
+  array_push($errors, "*Programme of Study is required");
+    } else{
+      $pos= mysqli_real_escape_string($db, $_POST['pos']);
+    }
+    if(!isset($_POST['fee'])){ 
+      array_push($errors, "*Check the INSTITUTE/HOSTEL DUES field");
+        } else{
+          $fee= mysqli_real_escape_string($db, $_POST['fee']);
         }
-      if (empty($fee)){ 
-        array_push($errors, "*Check the INSTITUTE/HOSTEL DUES field");
-        }
-      if (empty($dues)) { 
-        array_push($errors, "*Check the OTHER DUES field");
-        }
+        if(!isset($_POST['dues'])){ 
+          array_push($errors, "*Check the OTHER DUES field");
+            } else{
+              $dues= mysqli_real_escape_string($db, $_POST['dues']);
+            }
+      
+     
       if (empty($sem)) { 
         array_push($errors, "*Select the SEMESTER");
         }
@@ -71,11 +82,12 @@ if (isset($_POST['login_user'])) {
         array_push($errors, "*Please select Semester and Course");
         }
         else{
-        if($_POST['course'] == -1){
+        if(!isset($_POST['course'])){
         array_push($errors, "*Please select Course");
         }
       }
 
+      
 
      
       

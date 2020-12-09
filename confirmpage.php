@@ -1,11 +1,19 @@
 
 <?php 
-
 include('server.php');
   ?>
+<style>
+<?php include 'register_style.css'; ?>
+</style>
+
+
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Amaranth&display=swap" rel="stylesheet">
+
 <title>Confirmation</title>
 <style>
   table {
@@ -16,17 +24,26 @@ include('server.php');
     }
     table tr td,
     table tr th {
-        border: 1px solid black;
-        padding: 25px;
+        border: .1vw solid black;
+        padding: 1.41vw;
     }
 
-</style>
+    table tr th {
+        border: .1vw solid white;
+    }
+    
+    form
+{
+        background-color:#f8f8f8;
+}
+
+  </style>
 
 </head>
 <body>
 <form method="post" >
    <div class="header">
-  	<h2>COURSE REGISTRATION</h2>
+  	<center><h2>COURSE REGISTRATION</h2></center>
   </div>
   <?php echo "1. Programme of Study : " . $_SESSION["prgofstudy"] . "<br>"; ?>
   <?php echo "2. Whether paid <br> a.Institute/Hostel fees : " . $_SESSION["feestatus"] . "<br>"; ?>
@@ -47,7 +64,7 @@ include('server.php');
     $_SESSION["mno"]=$mno;
     $_SESSION["email"]=$email;
   ?>
- <?php echo "4.Course registered : "; ?>
+ <?php echo "4.Courses registered : "; ?>
  <br><br>
   <table>
         <thead id="myh">
@@ -69,12 +86,17 @@ include('server.php');
           while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
           echo "<tr><td>" . $row['cid'] . "</td><td>" . $row['cname'] . "</td> <td>" . $row['credit'] . "</td></tr>";  
           }
-          echo " <tfoot>
-          <tr> <td colspan='3'>TOTAL CREDITS:" . $_SESSION["tcred"] . "</td> </tr>
-        </tfoot>";
-
-          echo "</table>"; //Close the table in HTML
+          
         ?>
+           <tfoot>
+          <tr> <td colspan='2'>TOTAL CREDITS:</td> 
+          <td> <?php $qry="SELECT SUM(credit) AS vsum FROM temp1";
+          $res=mysqli_query($db,$qry);
+          $tc=mysqli_fetch_array($res);
+          echo $tc['vsum'];
+
+          ?></td></tr>
+        </tfoot>
         </tbody>
         </table>
         <?php echo "5.Redo Courses : "; ?>
@@ -102,18 +124,21 @@ include('server.php');
           echo "</table>"; //Close the table in HTML
         ?>
         </tbody>
-        </table>
-  
-        <button type="submit" class="btn" name="confirm">Confirm</button>
+        </table><br>
+          <div class="back" >
+        <button type="submit" class="btn" name="confirm">Confirm  &raquo;</button>
+        </div>
     	</div>
+
+     
+     
+
         
         
 
 
 </form>
-
-
-            <span><button onclick="goBack()">Back</button></span>
+<span><button onclick="goBack()" class="btn">&laquo; Back</button></span> 
             <script>
 function goBack() {
   window.history.back();

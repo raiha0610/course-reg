@@ -77,12 +77,25 @@ var id = 1;
 /*Assigning id and class for tr and td tags for separation.*/
 $("#butsend").click(function() {
 var newid = id++; 
+var rname=$("#rcname").val() ;
+
+var rid=$("#rcid").val() ;
+var rcred=$("#rcredit").val() ;
+if(rname==""||rid==""||rcred==""){
+alert("Empty fields");
+}
+
+
+else{
 $("#table1").append('<tr valign="top" id="'+newid+'">\n\
-<td width="100px" class="rcid'+newid+'">' + $("#rcid").val() + '</td>\n\
-<td width="100px" class="rcname'+newid+'">' + $("#rcname").val() + '</td>\n\
-<td width="100px" class="rcredit'+newid+'">' + $("#rcredit").val() + '</td>\n\
-<td width="100px"><a href="javascript:void(0);" class="remCF">Remove</a></td>\n\ </tr>');
+<td  class="rcid'+newid+'">' + rid + '</td>\n\
+<td  class="rcname'+newid+'">' + rname + '</td>\n\
+<td class="rcredit'+newid+'">' + rcred + '</td>\n\
+<td ><a href="javascript:void(0);" class="remCF">Remove</a></td>\n\ </tr>');
+}
+
 });
+
 $("#table1").on('click', '.remCF', function() {
 $(this).parent().parent().remove();
 });
