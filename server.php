@@ -73,9 +73,7 @@ if(mysqli_num_rows($sol) == 0)
             }
       
      
-      if (empty($sem)) { 
-        array_push($errors, "*Select the SEMESTER");
-        }
+  
       
 
         if($_POST['sem'] == -1){

@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Amaranth&display=swap" rel="stylesheet">
 
@@ -65,16 +66,16 @@
       <label >SEMESTER:</label><br>
       
     <select name="sem" id="sem" >
-        <option class="dropbtn" selected value="base">SELECT SEMESTER:</option>
+        <option class="dropbtn" selected value="-1">SELECT SEMESTER:</option>
         
-        <option  <?php if($sem == '1') echo "selected"; ?> value="1">1</option>
-        <option  <?php if($sem == '2') echo "selected"; ?>  value="2">2</option>
-        <option  <?php if($sem == '3') echo "selected"; ?> value="3">3</option>
-        <option  <?php if($sem == '4') echo "selected"; ?>  value="4">4</option>
-        <option  <?php if($sem == '5') echo "selected"; ?>  value="5">5</option>
-        <option  <?php if($sem == '6') echo "selected"; ?>  value="6">6</option>
-        <option  <?php if($sem == '7') echo "selected"; ?>  value="7">7</option>
-        <option  <?php if($sem == '8') echo "selected"; ?> value="8">8</option>
+        <option  value="1">1</option>
+        <option   value="2">2</option>
+        <option   value="3">3</option>
+        <option    value="4">4</option>
+        <option    value="5">5</option>
+        <option   value="6">6</option>
+        <option  value="7">7</option>
+        <option   value="8">8</option>
         
 </select>
 
@@ -159,7 +160,7 @@
 <tr>
 </tbody>
 </table>
-<input type="button" name="save" class="bton" value="Save" id="butsave" required>
+<input type="button" name="save" class="bton" value="Save" id="butsave" >
 </div></div>
 
 <br>
