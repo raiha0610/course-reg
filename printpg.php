@@ -150,19 +150,9 @@ transform: translateY(.525vw);
     }
     </script>
 </head>
-
+</head>
 <body>
-<?php if (isset($_POST['confirm'])) {
-          $date=date("d-m-Y");
-       echo $date;
-           while($row = mysqli_fetch_object($result)){  
-           $sql="INSERT INSERT INTO course_reg (ROLL_NO, COURSE_ID, DATE_OF_REGISTRATION) VALUES ('$rno','$row->cid','$date')";
-           $res=mysqli_query($db,$sql);
-            }
 
-            header('location: printpg.php');
-        }
-        ?>
     <div class="header">
         <div class="logo" >
             <img src="nitpy_img.jpg" alt="nitpy" style="width:15%;height:15%;" >

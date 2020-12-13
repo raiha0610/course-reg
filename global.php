@@ -2,8 +2,9 @@
 
 
 if(isset($_POST['mydata'])) {
- 
-    $sql = "SELECT COURSE_NAME FROM global_electives ";
+  $rno=$_SESSION['rollno'];
+  
+    $sql = "SELECT COURSE_NAME FROM global_electives c,student_details s WHERE c.DEPARTMENT!=s.COURSE_ALLOTTED and s.ROLL_NO='$rno'";
 
     $res =  $db->query($sql);
   
