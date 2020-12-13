@@ -150,7 +150,7 @@ transform: translateY(.525vw);
     }
     </script>
 </head>
-</head>
+
 <body>
 <?php if (isset($_POST['confirm'])) {
           $date=date("d-m-Y");
