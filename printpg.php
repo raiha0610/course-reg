@@ -179,7 +179,12 @@ transform: translateY(.525vw);
                 }
          ?>
           <h3 style="text-decoration: underline;text-align:center;">
-             <?php echo "COURSE REGISTRATION FORM ". date("Y") ."-".date('Y', strtotime('+1 year')). " ".$x;?>
+             <?php 
+             if($x=="ODD SEMESTER")
+             echo "COURSE REGISTRATION FORM ". date("Y") ."-".date('Y', strtotime('+1 year')). " ".$x;
+             else
+             echo "COURSE REGISTRATION FORM ". date('Y', strtotime('-1 year')) ."-".date('Y'). " ".$x;
+             ?>
           </h3>
           <div class="content">
               <label>1. Programme of Study :<?php echo $_SESSION["prgofstudy"] ; ?></label>
