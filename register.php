@@ -1,3 +1,5 @@
+
+
 <?php include('server.php');?>
 <style>
 <?php include 'register_style.css'; ?>
@@ -101,8 +103,8 @@
    </div>
      <br>
      <div class="input-group">
-       <div  class="bg">
-     <table id="c-table" class="table table-bordered" >
+       <div  class="bg" style="overflow-x:auto;">
+     <table id="c-table" class="table table-bordered">
         <thead id="myh">
             <tr>
                 <th>SELECT</th>
@@ -165,9 +167,6 @@
 
 <br>
 
-   
-
-  
   	<div class="input-group">
    
      <center> <button  class="button button1" type="submit" id="btn" name="reg_user">REGISTER</button></center>
@@ -183,7 +182,7 @@
         if(rcid == ""){
           rciderr.innerHTML = " **REDO course ID should not be empty ";
         }
-        var expr = /^([A-Za-z]{1,2}[0-9]{3,4})+$/;
+        var expr = /^([A-Z]{1,2}[0-9]{3,4})+$/;
         if (!expr.test(rcid)) {
             rciderr.innerHTML = " **Invalid REDO Course ID ";
         }
@@ -192,7 +191,7 @@
         var rcname = document.getElementById("rcname").value;
         var rcnameerr = document.getElementById("rcnameerr");
         rcnameerr.innerHTML = "";
-        var expr = /^[ A-Za-z]+$/
+        var expr = /^[ A-Z]+$/
         rcnamelen=rcname.length;
         if( rcname ==""){
           rcnameerr.innerHTML = " **REDO course name should not be empty ";

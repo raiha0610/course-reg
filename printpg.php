@@ -19,7 +19,8 @@
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
-
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 body {
@@ -49,44 +50,96 @@ img{
 }
 .content{
   margin-left: 10%;
+  margin-right: 10%;
   margin-top: 5%;
   line-height: 2.5;
 }
 .footer{
   margin-left: 10%;
+  margin-right: 10%;
   margin-top: 5%;
 }
 .print{
   text-align: center;
 }
 
+
 .btn {
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  transition-duration: 0.5s;
-  cursor: pointer;
+background-color: #4CAF50; /* Green */
+border-style: none;
+color: white;
+border-radius: 5%;
+padding: .72vw 1.35vw;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: .85vw;
+font-weight:bold;
+margin: .1125vw .1125vw;
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.button1:hover,.btn:hover {
+background-color: white; 
+color: #4CAF50; 
+border: .1125vw solid #4CAF50;
+box-shadow: 0 .675vw .9vw 0 rgba(0,0,0,0.24),0 .954vw 2.8125vw 0 rgba(0,0,0,0.19);
+}
+
+.button1:active,.btn:active {
+background-color: #3e8e41;
+box-shadow: 0 .28125vw #666;
+transform: translateY(.0225vw);
+color:white;
 }
 
 .button1 {
-  font-size: 15px;
-  background-color: white;
-  color: black;
-  border: 2px solid #4CAF50;
-  border-radius: 8px;
+background-color: #4CAF50;
+color: black;
 }
 
-.button1:hover {
-  background-color: #e7e7e7;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+@media (min-width: 1024px)
+{
+  
 }
-.button:active {
-  transform: translateY(4px);
+
+@media (min-width: 769px) and (max-width: 1023px)
+{
+  
+  .btn
+  {
+    font-size: 1.3vw;
+  }
+
+.button1:active,.btn:active { 
+box-shadow: 0 .58125vw #666;
+transform: translateY(.525vw);
 }
+
+}
+  
+
+@media (max-width: 768px)
+{
+  div[class="footer"] h4
+  {
+    font-size:3vw;
+  }
+
+  .btn
+  {
+    font-size: 2.5vw;
+  }
+
+  .button1:active,.btn:active { 
+    box-shadow: 0 .98125vw #666;
+    transform: translateY(.525vw);
+  }
+  
+}
+
 </style>
 <script>
  function printpage() {
@@ -239,13 +292,12 @@ img{
           </div>
       </div>
       <br>
-      
-            <div class="print">
+
+          <div class="print">
                 <button class="btn button1" id="printpagebutton" onclick="printpage()">Print</button>
              </div>
   
-        
-
+<br><br>
 
 </body>
 </html>
